@@ -104,9 +104,11 @@ export const HeroSection = () => {
           </h1>
         </div>
         
-        <div className="mb-6 px-4 py-2 rounded-full inline-flex items-center gap-2 border border-white/30 bg-white/10 backdrop-blur-sm animate-fade-in shadow-xl">
+
+        {/* Balancing Margin top and bottom update */}
+        <div className="mb-3 mt-3 px-4 py-2 rounded-full inline-flex items-center gap-2 border border-white/30 bg-white/10 backdrop-blur-sm animate-fade-in shadow-xl">
           <MapPinIcon className="h-5 w-5 text-[#fbbf24] shrink-0" />
-          <span className="text-sm sm:text-base font-semibold text-white">
+          <span className="text-sm sm:text-base mb-2 font-semibold text-white">
             ၁၉၉၅ ခုနှစ်မှစ၍ တိကျသော မြေပုံရေးဆွဲခြင်း 
           </span>
         </div>
@@ -119,7 +121,8 @@ export const HeroSection = () => {
                 alt={slides[activeSlide].title}
                 className="w-full aspect-[16/10] object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-black/75 px-6 pb-5 pt-8 backdrop-blur-sm">
+              {/*Reducing Backdrop bg black   */}
+              <div className="absolute inset-x-0 bottom-0 bg-black/70 px-6 pb-5 pt-8 backdrop-blur-md">
                 <p className="text-lg font-bold text-white sm:text-xl">{slides[activeSlide].title}</p>
                 <p className="mt-1 text-xs text-gray-300 sm:text-sm">{slides[activeSlide].description}</p>
                 <div className="mt-3 space-y-1">
@@ -133,11 +136,14 @@ export const HeroSection = () => {
             <p className="mt-8 text-lg text-white leading-relaxed max-w-xl drop-shadow-sm">
               အရည်အသွေးမြင့် ရန်ကုန်မြေပုံများ၊ စိတ်ကြိုက်မြေပုံပုံနှိပ်ခြင်းများနှင့် မြို့နယ်မြေပုံစာအုပ် စုဆောင်းမှုကို ရှာဖွေပါ။ မြန်မာတစ်နိုင်ငံလုံးရှိ ပညာရှင်များ ယုံကြည်စိတ်ချရသောမြေပုံ၀န်ဆောင်မှု။
             </p>
-
+{/* Button COlor changed */}
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <button className="bg-[#d946ef] hover:bg-[#c026d3] text-white px-8 py-3 rounded-md font-bold flex items-center justify-center gap-2 shadow-lg transition-colors">
-                ယခုဝယ်ရန် <ArrowRight className="h-5 w-5" />
-              </button>
+<button 
+  style={{ backgroundColor: "#ef7646" }}
+  className="hover:bg-[#c026d3] text-white px-8 py-3 rounded-md font-bold flex items-center justify-center gap-2 shadow-lg transition-colors"
+>
+  ယခုဝယ်ရန် <ArrowRight className="h-5 w-5" />
+</button>
               <button className="bg-white/10 border border-white/30 text-white px-8 py-3 rounded-md font-bold hover:bg-white/20 transition-colors backdrop-blur-sm">
                 ဆိုင်ကိုကြည့်ပါ
               </button>
@@ -159,36 +165,49 @@ export const HeroSection = () => {
               <div className="w-px h-10 bg-white/20 hidden sm:block"></div>
               <div>
                 <span className="text-3xl font-black text-white">34</span>
-                <p className="text-xs text-white/70">မြို့နယ်များ</p>
+                <p className="text-xs text-white/70">ရန်ကုန် မြို့နယ်များ ပါ၀င်သည်။</p>
               </div>
             </div>
           </div>
           
-          <div className="w-full">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-sm shadow-2xl">
-              <p className="text-[10px] uppercase tracking-widest text-white/60 font-bold mb-4">Maps List</p>
-              <div className="grid gap-3">
-                {slides.map((slide, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveSlide(idx)}
-                    className={`relative w-full p-4 text-left transition-all duration-300 border ${
-                      activeSlide === idx
-                        ? 'bg-white/25 border-white/50 shadow-xl scale-[1.02]'
-                        : 'bg-white/5 border-white/10 hover:bg-white/15'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-sm text-white">{slide.title}</span>
-                      <span className="text-[9px] border border-white/40 px-1.5 py-0.5 rounded text-white/70 uppercase">Map</span>
-                    </div>
-                    <p className="text-[11px] text-white/60 mt-1 line-clamp-1">{slide.description}</p>
-                    <p className="text-[11px] font-bold text-white mt-2">{slide.prices[0]}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
+{/* Border color updated with style tag */}
+<div className="w-full">
+  <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-sm shadow-2xl">
+    <p className="text-[12px] uppercase tracking-[0.2em] text-white/60 font-bold mb-5">Maps List</p>
+    <div className="grid gap-4">
+      {slides.map((slide, idx) => (
+        <div
+          key={idx}
+          onClick={() => setActiveSlide(idx)}
+          className={`relative w-full p-6 text-left transition-all duration-300 cursor-pointer ${
+            activeSlide === idx
+              ? 'bg-white/20 shadow-[0_0_20px_rgba(249,115,22,0.3)] scale-[1.02] z-10'
+              : 'bg-white/5 border border-white/10 hover:bg-white/15'
+          }`}
+          style={{ 
+            outline: activeSlide === idx ? "1px solid #f97316" : "0.5px solid rgba(255,255,255,0.1)",
+            border: "none" 
+          }}
+        >
+          <div className="flex items-center justify-between gap-4">
+            <span className="font-bold text-lg text-white">
+              {slide.title}
+            </span>
+            <span className="text-[10px] border border-white/40 px-2 py-0.5 rounded text-white/70 uppercase font-bold">
+              Map
+            </span>
           </div>
+          <p className="text-[14px] text-white/80 mt-2 line-clamp-2 leading-relaxed">
+            {slide.description}
+          </p>
+          <p className="text-[15px] font-bold text-white mt-3">
+            {slide.prices[0]}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
         </div>
       </div>
 

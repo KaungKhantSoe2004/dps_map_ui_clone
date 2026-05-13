@@ -1,30 +1,10 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from './assets/vite.svg'
-// import heroImg from './assets/hero.png'
-// import './App.css'
+
+import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Commoner from './pages/commoner'
 import Home from './pages/Home'
 
-// function App() {
 
-//   return (
-//     <>
-{/* <BrowserRouter>
-<Routes>
-  <Route path='/' element={<Commoner />}>
-    <Route index element={<Home />} />
-    <Route path='/products' element={<div>This is products page</div>} />
-    </Route>
-</Routes>
-</BrowserRouter> */}
-//     </>
-//   )
-// }
-
-// export default App
-// // 
 import React, { useState, useEffect } from 'react';
 import { 
   Bell, Tag, MapPin, ChevronDown, User, ShoppingCart, Menu, 
@@ -33,6 +13,7 @@ import {
   ChevronLeft, ChevronRight, CircleHelp, Phone, Mail,  
   Globe, Download, ShoppingBag, X 
 } from 'lucide-react';
+import ProductsPage from './pages/products';
 
 
 
@@ -184,7 +165,7 @@ const App = () => {
 <Routes>
   <Route path='/' element={<Commoner />}>
     <Route index element={<Home />} />
-    <Route path='/products' element={<div>This is products page</div>} />
+    <Route path='/products' element={<ProductsPage />} />
     </Route>
 </Routes>
 </BrowserRouter>
