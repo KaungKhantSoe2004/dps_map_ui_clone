@@ -10,6 +10,8 @@ export default function Home(){
         <PopularProductsSection />
         <FeaturedProductSection />
         <WhyChooseUsSection />
+        <TestimonialsSection />
+        {/* Switched the components of section and Testimonial section */}
         <section className="py-20 md:py-28 parchment-texture relative overflow-hidden">
           <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-primary/5 blur-3xl"></div>
           <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-terracotta/5 blur-3xl"></div>
@@ -21,7 +23,7 @@ export default function Home(){
             </div>
           </div>
         </section>
-        <TestimonialsSection />
+        
         <FAQSection />
       </main>
     )

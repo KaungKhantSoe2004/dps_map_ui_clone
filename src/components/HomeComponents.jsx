@@ -434,7 +434,7 @@ export const PopularProductsSection = () => {
       originalPrice: 50000,
       rating: 4.9,
       reviewCount: 89,
-      image: '/assets/shwe-DK6LB3rV.jpg',
+      image: '/assets/mandalay-CwXEyMM8.jpg',
       badge: 'လျှော့စျေး',
       href: '/product/shwe-taung-soft-copy'
     },
@@ -573,25 +573,51 @@ export const WhyChooseUsSection = () => {
   ];
   
   return (
-    <section className="py-16 md:py-20 bg-primary text-primary-foreground">
-      <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="font-display text-2xl font-bold md:text-3xl">DPS Map ကို ဘာကြောင့် ရွေးချယ်သင့်သလဲ?</h2>
-          <p className="mt-2 text-primary-foreground/70 max-w-xl mx-auto">မြန်မာတစ်နိုင်ငံလုံးရှိ ပညာရှင်များ၊ ပညာရေးသမားများနှင့် မြေပုံဝါသနာရှင်များ ယုံကြည်စိတ်ချရစွာသုံးစွဲသောကြောင့် </p>
+<section className="py-16 md:py-20 bg-primary text-primary-foreground">
+  <div className="container" style={{ marginLeft: "auto", marginRight: "auto", paddingLeft: "1rem", paddingRight: "1rem" }}>
+    <div className="text-center mb-12">
+      <h2 className="font-display text-2xl font-bold md:text-3xl">DPS Map ကို ဘာကြောင့် ရွေးချယ်သင့်သလဲ?</h2>
+      <p className="mt-2 text-primary-foreground/70 max-w-xl mx-auto">မြန်မာတစ်နိုင်ငံလုံးရှိ ပညာရှင်များ၊ ပညာရေးသမားများနှင့် မြေပုံဝါသနာရှင်များ ယုံကြည်စိတ်ချရစွာသုံးစွဲသောကြောင့်</p>
+    </div>
+    {/* Updated spaces of the inner elements evenly */}
+    <div 
+      style={{ 
+        display: "flex", 
+        flexWrap: "wrap", 
+        justifyContent: "space-evenly", 
+        alignItems: "flex-start",
+        gap: "40px",
+        width: "100%"
+      }}
+    >
+      {features.map((feature, idx) => (
+        <div 
+          key={idx} 
+          className="animate-slide-up" 
+          style={{ 
+            animationDelay: `${idx * 0.1}s`,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            flex: "1 1 250px",
+            maxWidth: "300px",
+            padding: "10px"
+          }}
+        >
+          <div 
+            className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl"
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+          >
+            <feature.icon className="h-8 w-8" />
+          </div>
+          <h3 className="font-display text-lg font-semibold">{feature.title}</h3>
+          <p className="mt-2 text-sm text-primary-foreground/70">{feature.description}</p>
         </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature, idx) => (
-            <div key={idx} className="text-center animate-slide-up" style={{ animationDelay: `${idx * 0.1}s` }}>
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-foreground/10">
-                <feature.icon className="h-8 w-8" />
-              </div>
-              <h3 className="font-display text-lg font-semibold">{feature.title}</h3>
-              <p className="mt-2 text-sm text-primary-foreground/70">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
   );
 };
 

@@ -1,12 +1,31 @@
 import { 
   Bell, Tag, MapPin, ChevronDown, User, ShoppingCart, Menu, 
-  ArrowRight, MapPin as MapPinIcon, ExternalLink, Layers, Image, 
-  FileJson, Star, BookOpen, Shield, Truck, Award, Quote, 
-  ChevronLeft, ChevronRight, CircleHelp, Phone, Mail,  
-  Globe, Download, ShoppingBag, X 
+  ShoppingBag, X 
 } from 'lucide-react';
 import { useState } from 'react';
-import { Button } from './HomeComponents';
+
+const Button = ({ children, variant, size, className, onClick, ...props }) => {
+  const baseStyles = "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50";
+  const variants = {
+    outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+    default: "bg-primary text-primary-foreground hover:bg-primary/90",
+  };
+  const sizes = {
+    sm: "h-9 px-3",
+    default: "h-10 px-4 py-2",
+  };
+  
+  return (
+    <button 
+      className={`${baseStyles} ${variants[variant] || variants.default} ${sizes[size] || sizes.default} ${className}`} 
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
 const MarqueeBar = () => {
   return (
     <div className="bg-black text-white py-2 text-sm font-medium overflow-hidden relative z-[60]">
@@ -21,7 +40,7 @@ const MarqueeBar = () => {
         </span>
         <span className="flex items-center gap-2">
           <MapPin className="h-4 w-4" />
-          <span>Visit us at Pazundaung Township. Open daily 9am-6pm.ph-09775204020</span>
+          <span>Visit us at Pazundaung Township. Open daily 9am-6pm. ph-09775204020</span>
         </span>
       </div>
     </div>
@@ -30,10 +49,21 @@ const MarqueeBar = () => {
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+  const dropdownItems = [
+    { name: "Address Search", href: "#" },
+    { name: "Poi Search", href: "#" },
+    { name: "nav.quasar", href: "#" },
+    { name: "1sqft", href: "#" }
+  ];
+  
+  // Get current path to determine active link
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
   
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="container flex h-16 items-center justify-between md:h-20">
+      <div className="container flex h-16 items-center justify-between md:h-20" style={{ marginLeft: "auto", marginRight: "auto" }}>
         <a className="flex items-center gap-2 transition-opacity hover:opacity-80" href="/">
           <img src="/assets/logo-DYT2u1Kn.png" alt="Logo" className="h-16 w-16" />
           <div className="flex flex-col">
@@ -43,22 +73,63 @@ const Header = () => {
         </a>
         
         <nav className="hidden items-center gap-1 lg:flex">
-          <a className="relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary text-primary" href="/">
+          <a 
+            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary ${currentPath === '/' ? 'text-primary' : 'text-muted-foreground'}`} 
+            href="/"
+          >
             ပင်မစာမျက်နှာ
-            <span className="absolute bottom-0 left-1/2 h-0.5 w-8 -translate-x-1/2 rounded-full bg-primary"></span>
+            {currentPath === '/' && (
+              <span className="absolute bottom-0 left-1/2 h-0.5 w-8 -translate-x-1/2 rounded-full bg-primary"></span>
+            )}
           </a>
-          <div className="relative">
-            <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors hover:text-primary text-muted-foreground">
-              App <ChevronDown className="h-4 w-4" />
+
+          {/* Dropdown Added */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <button className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors hover:text-primary ${currentPath.startsWith('/app') ? 'text-primary' : 'text-muted-foreground'}`}>
+              App 
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
+            
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute left-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-[100]">
+                {dropdownItems.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.href}
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-500 transition-colors border-b border-gray-100 last:border-b-0"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
-          <a className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary text-muted-foreground" href="/products">
+{/* Added active class */}
+          <a 
+            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-primary ${currentPath === '/products' ? 'text-primary' : 'text-muted-foreground'}`} 
+            href="/products"
+          >
             မြေပုံများ ဝယ်ရန်
+            {currentPath === '/products' && (
+              <span className="absolute bottom-0 left-1/2 h-0.5 w-8 -translate-x-1/2 rounded-full bg-primary"></span>
+            )}
           </a>
-          <a className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary text-muted-foreground" href="https://maprint.dpsmap.com/">
+          
+          <a 
+            className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary text-muted-foreground" 
+            href="https://maprint.dpsmap.com/"
+          >
             မြေပုံထုတ်မည် 
           </a>
-          <a className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary text-muted-foreground" href="https://myanmar.dpsmap.com/">
+          <a 
+            className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary text-muted-foreground" 
+            href="https://myanmar.dpsmap.com/"
+          >
             မဟာဗျူဟာ ရည်မှန်းချက်
           </a>
         </nav>
@@ -88,15 +159,30 @@ const Header = () => {
           </Button>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+          animation: marquee 55s linear infinite;
+        }
+        .pause-on-hover:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </header>
   );
 };
 
-const Navbar = ()=> {
-return(  <div className="  ">
+const Navbar = () => {
+  return (
+    <div className="w-full">
       <MarqueeBar />
       <Header />
-  </div>)
-}
+    </div>
+  );
+};
 
 export default Navbar;
