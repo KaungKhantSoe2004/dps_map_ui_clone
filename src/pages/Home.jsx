@@ -1,5 +1,6 @@
 // import HomeBanner from "../components/HomeBanner";
 // import HomePageBanner from "../components/HomeBanner";
+import FloatingStickyComponents from "../components/FloatingStickyComponents";
 import { FAQSection, FeaturedProductSection, HeroSection, MapTypesSection, PopularProductsSection, TestimonialsSection, WhyChooseUsSection } from "../components/HomeComponents";
 
 export default function Home(){
@@ -23,7 +24,7 @@ export default function Home(){
             </div>
           </div>
         </section>
-        
+        <FloatingStickyComponents />
         <FAQSection />
       </main>
     )
